@@ -10,12 +10,19 @@ Protocolo de comunicación bidireccional por audio similar a TCP/IP, con paquete
 - Confiabilidad: 95-99%
 - Hardware: Cualquiera
 
-### 🔇 Versión Ultrasónica (Silenciosa) ⭐ NUEVO
+### 🔇 Versión Ultrasónica (Silenciosa)
 - Velocidad: 750 bits/seg (93.75 bytes/seg) - **2x más rápido**
 - Frecuencias: 17-20.4 kHz (casi silencioso)
 - Confiabilidad: 100% (probado)
 - Hardware: Moderno (>17 kHz)
 - Ver: [README_ULTRASONIC.md](README_ULTRASONIC.md)
+
+### 📡 Modo Streaming (Escucha Continua) ⭐ NUEVO
+- **Escucha permanente**: Receptor siempre activo
+- **Nombre de archivo incluido**: Se guarda con nombre original
+- **Múltiples archivos**: Envía varios sin reiniciar
+- **Detección automática**: Sin intervención manual
+- Ver: [README_STREAMING.md](README_STREAMING.md)
 
 ## Características
 
@@ -57,6 +64,21 @@ python3 audio_receiver_ultrasonic.py tx_ultra archivo_recuperado.txt
 ```bash
 python3 test_ultrasonic_simple.py
 ```
+
+### Modo Streaming (Escucha Continua)
+
+**Receptor (mantener corriendo):**
+```bash
+python3 audio_stream_receiver.py ./recibidos/
+```
+
+**Emisor (enviar cuando quieras):**
+```bash
+python3 audio_stream_sender.py documento.txt
+python3 audio_stream_sender.py imagen.jpg
+```
+
+El receptor detecta automáticamente los archivos y los guarda con su nombre original.
 
 ### 3. Retransmitir paquetes perdidos
 
