@@ -1,0 +1,8 @@
+*.wav
+*.pyc
+__pycache__/
+*.txt
+!requirements.txt
+test_*
+tx_*
+rx_*
