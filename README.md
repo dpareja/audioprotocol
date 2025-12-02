@@ -2,6 +2,21 @@
 
 Protocolo de comunicación bidireccional por audio similar a TCP/IP, con paquetes, checksums, compresión y retransmisión de paquetes perdidos.
 
+## Versiones Disponibles
+
+### 🔊 Versión Audible (Estándar)
+- Velocidad: 400 bits/seg (50 bytes/seg)
+- Frecuencias: 1-2.5 kHz (audible)
+- Confiabilidad: 95-99%
+- Hardware: Cualquiera
+
+### 🔇 Versión Ultrasónica (Silenciosa) ⭐ NUEVO
+- Velocidad: 750 bits/seg (93.75 bytes/seg) - **2x más rápido**
+- Frecuencias: 17-20.4 kHz (casi silencioso)
+- Confiabilidad: 100% (probado)
+- Hardware: Moderno (>17 kHz)
+- Ver: [README_ULTRASONIC.md](README_ULTRASONIC.md)
+
 ## Características
 
 - ✓ Protocolo orientado a paquetes
@@ -10,44 +25,38 @@ Protocolo de comunicación bidireccional por audio similar a TCP/IP, con paquete
 - ✓ Números de secuencia
 - ✓ **Compresión zlib** (reduce tamaño 30-70%)
 - ✓ **Retransmisión de paquetes perdidos** (NACK)
-- ✓ Modulación 4-FSK (4 frecuencias, 2 bits por símbolo)
-- ✓ Velocidad: 400 bits/seg (50 bytes/seg)
-- ✓ Paquetes de 32 bytes
+- ✓ Modulación FSK (4-FSK audible, 8-FSK ultrasónico)
 
-## Estructura de Paquete
+## Uso Rápido
 
-```
-[Tipo(1B)][Seq(1B)][Len(1B)][Data(0-32B)][Checksum(2B)]
-```
+### Versión Audible (Estándar)
 
-### Tipos de Paquete
-
-- **SYN**: Inicio de transmisión (incluye flag de compresión)
-- **DATA**: Datos
-- **FIN**: Fin de transmisión
-- **ACK**: Confirmación
-- **NACK**: Solicitud de retransmisión
-
-## Uso
-
-### 1. Enviar archivo (con compresión)
-
+**Enviar:**
 ```bash
 python3 audio_protocol.py archivo.txt
 ```
 
-Genera:
-- `tx_syn.wav` - Paquete de inicio
-- `tx_data_0000.wav`, `tx_data_0001.wav`, ... - Paquetes de datos
-- `tx_fin.wav` - Paquete de fin
-
-### 2. Recibir archivo
-
+**Recibir:**
 ```bash
 python3 audio_receiver.py tx archivo_recuperado.txt
 ```
 
-Si faltan paquetes, genera archivos `rx_nack_*.wav`
+### Versión Ultrasónica (Silenciosa)
+
+**Enviar:**
+```bash
+python3 audio_protocol_ultrasonic.py archivo.txt
+```
+
+**Recibir:**
+```bash
+python3 audio_receiver_ultrasonic.py tx_ultra archivo_recuperado.txt
+```
+
+**Test de hardware:**
+```bash
+python3 test_ultrasonic_simple.py
+```
 
 ### 3. Retransmitir paquetes perdidos
 

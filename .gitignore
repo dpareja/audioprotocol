@@ -6,3 +6,4 @@ __pycache__/
 test_*
 tx_*
 rx_*
+!test_ultrasonic_simple.py
